@@ -4,36 +4,30 @@ import { RouterModule, Routes } from '@angular/router';
 import {
   WebComponentWrapper, WebComponentWrapperOptions
 } from '@angular-architects/module-federation-tools';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
-    'path': '',
+    path: '',
+    component: HomeComponent,
+  },
+  {
+    'path': 'products',
     loadChildren: () => loadRemoteModule({
       type: 'module',
       remoteEntry: 'http://localhost:4201/remoteEntry.js',
-      exposedModule: './CardModule'
-    }).then((m)=> m.CardModule)
+      exposedModule: './ProductsModule'
+    }).then((m)=> m.ProductsModule)
   },
   {
-    path: 'react',
+    path: 'clients',
     component: WebComponentWrapper,
     data: {
       type: 'script',
       remoteEntry: 'http://localhost:4202/remoteEntry.js',
       remoteName: 'react',
-      exposedModule: './web-components',
-      elementName: 'react-element',
-    } as WebComponentWrapperOptions,
-  },
-  {
-    path: 'counter',
-    component: WebComponentWrapper,
-    data: {
-      type: 'script',
-      remoteEntry: 'http://localhost:4202/remoteEntry.js',
-      remoteName: 'react',
-      exposedModule: './counter-component',
-      elementName: 'react-element',
+      exposedModule: './clients-module',
+      elementName: 'mf-react-clients',
     } as WebComponentWrapperOptions,
   },
 ];
