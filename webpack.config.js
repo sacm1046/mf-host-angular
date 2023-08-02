@@ -8,7 +8,7 @@ sharedMappings.register(
   path.join(__dirname, 'tsconfig.json'),
   [/* mapped paths to share */]);
 
-module.exports = {
+const config = {
   output: {
     uniqueName: "angularContainer",
     publicPath: "auto"
@@ -26,16 +26,20 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-        shared: share({
-          "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-          "@angular/common": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-          "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-          "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+      shared: share({
+        "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        "@angular/common": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
 
-          ...sharedMappings.getDescriptors()
-        })
+        ...sharedMappings.getDescriptors()
+      })
 
     }),
     sharedMappings.getPlugin()
   ],
 };
+
+config.output.publicPath = 'http://localhost:4203/'
+
+module.exports = config

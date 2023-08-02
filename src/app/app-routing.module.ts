@@ -1,10 +1,10 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './pages/home/home.component';
 import {
   WebComponentWrapper, WebComponentWrapperOptions
 } from '@angular-architects/module-federation-tools';
-import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   {
@@ -26,7 +26,7 @@ const routes: Routes = [
       type: 'script',
       remoteEntry: 'http://localhost:4202/remoteEntry.js',
       remoteName: 'react',
-      exposedModule: './clients-module',
+      exposedModule: './ClientsModule',
       elementName: 'mf-react-clients',
     } as WebComponentWrapperOptions,
   },
